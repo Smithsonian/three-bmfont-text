@@ -1,6 +1,7 @@
 var assign = require('object-assign');
+import {Texture, Color} from "three"
 
-module.exports = function createMSDFShader (opt) {
+export default function createMSDFShader (opt) {
   opt = opt || {};
   var opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
   var alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
@@ -22,8 +23,8 @@ module.exports = function createMSDFShader (opt) {
     return assign({
       uniforms: {
         opacity: { type: 'f', value: opacity },
-        map: { type: 't', value: map || new THREE.Texture() },
-        color: { type: 'c', value: new THREE.Color(color) }
+        map: { type: 't', value: map || new Texture() },
+        color: { type: 'c', value: new Color(color) }
       },
       vertexShader: [
         '#version 300 es',
@@ -70,8 +71,8 @@ module.exports = function createMSDFShader (opt) {
     return assign({
       uniforms: {
         opacity: { type: 'f', value: opacity },
-        map: { type: 't', value: map || new THREE.Texture() },
-        color: { type: 'c', value: new THREE.Color(color) }
+        map: { type: 't', value: map || new Texture() },
+        color: { type: 'c', value: new Color(color) }
       },
       vertexShader: [
         'attribute vec2 uv;',

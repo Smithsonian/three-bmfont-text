@@ -5,9 +5,12 @@ var createIndices = require('quad-indices')
 var vertices = require('./lib/vertices')
 var utils = require('./lib/utils')
 
-var Base = THREE.BufferGeometry
+import {BufferGeometry, Box3, BufferAttribute, Sphere} from "three";
+//var three = require('three')
 
-module.exports = function createTextGeometry (opt) {
+var Base = BufferGeometry
+
+export default function createTextGeometry (opt) {
   return new TextGeometry(opt)
 }
 
@@ -72,8 +75,8 @@ TextGeometry.prototype.update = function (opt) {
 
   // update vertex data
   this.setIndex(indices)
-  this.setAttribute('position', new THREE.BufferAttribute(positions, 2))
-  this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+  this.setAttribute('position', new BufferAttribute(positions, 2))
+  this.setAttribute('uv', new BufferAttribute(uvs, 2))
 
   // update multipage data
   if (!opt.multipage && 'page' in this.attributes) {
@@ -82,13 +85,13 @@ TextGeometry.prototype.update = function (opt) {
   } else if (opt.multipage) {
     // enable multipage rendering
     var pages = vertices.pages(glyphs)
-    this.setAttribute('page', new THREE.BufferAttribute(pages, 1))
+    this.setAttribute('page', new BufferAttribute(pages, 1))
   }
 }
 
 TextGeometry.prototype.computeBoundingSphere = function () {
   if (this.boundingSphere === null) {
-    this.boundingSphere = new THREE.Sphere()
+    this.boundingSphere = new Sphere()
   }
 
   var positions = this.attributes.position.array
@@ -108,7 +111,7 @@ TextGeometry.prototype.computeBoundingSphere = function () {
 
 TextGeometry.prototype.computeBoundingBox = function () {
   if (this.boundingBox === null) {
-    this.boundingBox = new THREE.Box3()
+    this.boundingBox = new Box3()
   }
 
   var bbox = this.boundingBox
