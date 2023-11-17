@@ -27,7 +27,7 @@ export default function createMSDFShader (opt) {
         color: { type: 'c', value: new Color(color) }
       },
       vertexShader: [
-        '#version 300 es',
+        //'#version 300 es',
 
         'in vec2 uv;',
         'in vec4 position;',
@@ -41,7 +41,7 @@ export default function createMSDFShader (opt) {
         '}'
       ].join('\n'),
       fragmentShader: [
-        '#version 300 es',
+        //'#version 300 es',
 
         'precision ' + precision + ' float;',
         'uniform float opacity;',
